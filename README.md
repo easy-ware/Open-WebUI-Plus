@@ -58,21 +58,18 @@ Welcome to **Open-WebUI-Plus** – an enhanced version of OpenWebUI that comes w
 
 Customize your experience by modifying the settings in Open-webui Admin Settings console:
 
-### TTS Settings
+# TTS Settings
 ## Voice selection
-# In the admin panel:
+### In the admin panel:
 1. Go to the audio settings and select the TTS Settings.
 2. In server select openai then in url set as `http://127.0.0.1:3400/v1`.
 3. In TTS Voice select from
- 1. `fast`
- 2. `slow`
- 3. `normal`
+- `fast`
+-  `slow`
+-  `normal`
 4. In TTS Model choose from availabel model ids get from `http://127.0.0.1:3400/v1/models` and copy the model id from there..
    
 
-- Speech rate
-- Pitch adjustment
-- Output device selection
 
 ### STT Settings
 - Language preferences
