@@ -51,15 +51,25 @@ Welcome to **Open-WebUI-Plus** – an enhanced version of OpenWebUI that comes w
 2. **Access the Interface:**
    Open your web browser and navigate to:
    ```
-   http://localhost:5000
+   http://localhost:7800
    ```
 
 ## ⚙️ Configuration
 
-Customize your experience by modifying the settings in `config/`:
+Customize your experience by modifying the settings in Open-webui Admin Settings console:
 
 ### TTS Settings
-- Voice selection
+## Voice selection
+# In the admin panel:
+1. Go to the audio settings and select the TTS Settings.
+2. In server select openai then in url set as `http://127.0.0.1:3400/v1`.
+3. In TTS Voice select from
+ 1. `fast`
+ 2. `slow`
+ 3. `normal`
+4. In TTS Model choose from availabel model ids get from `http://127.0.0.1:3400/v1/models` and copy the model id from there..
+   
+
 - Speech rate
 - Pitch adjustment
 - Output device selection
@@ -106,8 +116,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📫 Support
 
 - For bugs and features, please use the [Issue Tracker](https://github.com/easy-ware/Open-WebUI-Plus/issues)
-- Join our [Discord community](https://discord.gg/yourserver) for discussions
-- Check our [Documentation](https://docs.openwebuiplus.dev) for detailed guides
 
 ---
 
