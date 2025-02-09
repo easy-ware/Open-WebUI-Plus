@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/downloads/)
 
-The upgraded version of [OpenWebUI](https://github.com/search?q=OpenWebUI) with integrated STT engine and TTS support.
+The upgraded version of [OpenWebUI](https://github.com/open-webui) with integrated STT engine and TTS support.
 
 ## 🌟 Overview
 
