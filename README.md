@@ -53,6 +53,8 @@ Welcome to **Open-WebUI-Plus** – an enhanced version of OpenWebUI that comes w
    ```
    http://localhost:7800
    ```
+3. **Access in public**
+   Navigate to terminal and find the urls for stt , tts and main server and open-webui access urls and fill in settings you will get via cloudflare
 
 ## ⚙️ Configuration
 
@@ -62,22 +64,33 @@ Customize your experience by modifying the settings in Open-webui Admin Settings
 ## Voice selection
 ### In the admin panel:
 1. Go to the audio settings and select the TTS Settings.
-2. In server select openai then in url set as `http://127.0.0.1:3400/v1`.
+2. In server select openai then in url set as `generated url for TTS/v1`.
 3. In TTS Voice select from
 - `fast`
 -  `slow`
 -  `normal`
 4. In TTS Model choose from availabel model ids get from `http://127.0.0.1:3400/v1/models` and copy the model id from there..
+5. In api key set as open-webui-plus.....
 # Sample
 <p align="center">
   <img src="shots/tts.png" alt="Open-WebUI-Plus TTS Settings" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" width="800"/>
 </p>
 
 
-### STT Settings
+## STT Settings
+1. In the admin panel go to audio section and stt.
+2. choose openai as provider
+3. in url add `generated url for stt/whisper/v1`
+4. in api key type `open-webui-plus`
+5. select model from accroding to your system
+- base
+- small
+- medium
+- large-v3
 
+## Make sure to save settings...
 ### Server Configuration
-- Port number (default: 5000)
+- Port number (default: 7800)
 - Log level
 - API endpoints
 
