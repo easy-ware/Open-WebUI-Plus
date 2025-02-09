@@ -68,11 +68,11 @@ Customize your experience by modifying the settings in Open-webui Admin Settings
 -  `slow`
 -  `normal`
 4. In TTS Model choose from availabel model ids get from `http://127.0.0.1:3400/v1/models` and copy the model id from there..
---
+# Sample
 <p align="center">
   <img src="shots/tts.png" alt="Open-WebUI-Plus TTS Settings" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" width="800"/>
 </p>
---
+
 
 ### STT Settings
 
