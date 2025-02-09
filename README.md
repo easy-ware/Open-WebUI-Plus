@@ -1,137 +1,114 @@
-### Open-WebUI-Plus
-## The upgraded version for open-webui with stt engine and tts support...
-
-
----
-
-```markdown
 # Open-WebUI-Plus
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/Python-3.x-blue.svg)](https://www.python.org/downloads/)
 
-Welcome to **Open-WebUI-Plus** – an upgraded version of [OpenWebUI](https://github.com/search?q=OpenWebUI) that now comes packed with integrated **TTS (Text-to-Speech)** and **STT (Speech-to-Text)** support. This project provides an all-in-one, user-friendly interface for both voice and text interactions, built for flexibility and ease-of-use on Windows, macOS, and Linux.
+The upgraded version of [OpenWebUI](https://github.com/search?q=OpenWebUI) with integrated STT engine and TTS support.
 
----
+## 🌟 Overview
+
+Welcome to **Open-WebUI-Plus** – an enhanced version of OpenWebUI that comes with built-in **TTS (Text-to-Speech)** and **STT (Speech-to-Text)** capabilities. This project provides a seamless, user-friendly interface for both voice and text interactions, designed for optimal performance across Windows, macOS, and Linux platforms.
 
 ## ✨ Features
 
-- **Enhanced User Interface:** A modernized, intuitive UI built on top of the original OpenWebUI.
-- **Integrated TTS & STT:** Enjoy built-in voice synthesis and speech recognition capabilities.
-- **Cross-Platform Compatibility:** Runs smoothly on Windows, macOS, and Linux with Python 3.
-- **Easy Setup:** Install all dependencies with a single command.
-- **Customizable Configurations:** Easily modify server settings, TTS parameters, STT options, and more.
-
----
+- **Enhanced User Interface:** Modern, intuitive UI built on the original OpenWebUI foundation
+- **Voice Integration:** 
+  - Built-in Text-to-Speech (TTS) for natural voice output
+  - Speech-to-Text (STT) capabilities for voice command recognition
+- **Cross-Platform Support:** 
+  - Compatible with Windows, macOS, and Linux
+  - Requires Python 3.x
+- **Simplified Setup:** One-command dependency installation
+- **Flexible Configuration:** Easy customization of server settings, TTS/STT parameters
 
 ## 📥 Installation
 
 1. **Clone the Repository:**
-
    ```bash
    git clone https://github.com/easy-ware/Open-WebUI-Plus.git
    cd Open-WebUI-Plus
    ```
 
 2. **Install Dependencies:**
-
-   Install the required Python packages using pip:
-
    ```bash
    pip install -r requirements/req.txt
    ```
+   > Note: Use `pip3` if your system defaults to Python 2
 
-   > **Note:** If your system defaults to Python 2, use `python3` instead.
+## 🚀 Quick Start
 
----
-
-## 🚀 Usage
-
-Start the Open-WebUI-Plus server with one of the commands below:
-
-- **Using the default Python command:**
-
+1. **Launch the Server:**
    ```bash
    python open-webui-plus/server.py
    ```
-
-- **Using Python 3 explicitly (if needed):**
-
+   Alternative commands if needed:
    ```bash
    python3 open-webui-plus/server.py
-   ```
-
-- **Alternative Command (if using a driver script):**
-
-   ```bash
+   # OR
    python driver open-webui-plus/server.py
    ```
 
-Once the server is running, open your web browser and navigate to:
-
-[http://localhost:5000](http://localhost:5000)
-
-> **Tip:** If port `5000` is in use, adjust the port number in your configuration settings.
-
----
+2. **Access the Interface:**
+   Open your web browser and navigate to:
+   ```
+   http://localhost:5000
+   ```
 
 ## ⚙️ Configuration
 
-Customize your Open-WebUI-Plus experience by editing the configuration files (typically located in the `config/` directory, if provided). You can modify settings for:
+Customize your experience by modifying the settings in `config/`:
 
-- **TTS Options:** Select voices, adjust speed, pitch, etc.
-- **STT Options:** Set language preferences and recognition parameters.
-- **Server Settings:** Change port numbers, logging levels, and other parameters.
+### TTS Settings
+- Voice selection
+- Speech rate
+- Pitch adjustment
+- Output device selection
 
----
+### STT Settings
+- Language preferences
+- Recognition accuracy
+- Input device selection
+
+### Server Configuration
+- Port number (default: 5000)
+- Log level
+- API endpoints
 
 ## 🤝 Contributing
 
-Contributions are always welcome! To contribute:
+We welcome contributions! Here's how you can help:
 
-1. **Fork the Repository.**
-2. **Create a New Branch:**
-
+1. Fork the repository
+2. Create your feature branch:
    ```bash
-   git checkout -b feature/your-feature-name
+   git checkout -b feature/amazing-feature
    ```
-
-3. **Commit Your Changes:**
-
+3. Commit your changes:
    ```bash
-   git commit -m "Add your feature or bugfix description"
+   git commit -m 'Add amazing feature'
    ```
-
-4. **Push to Your Branch:**
-
+4. Push to your branch:
    ```bash
-   git push origin feature/your-feature-name
+   git push origin feature/amazing-feature
    ```
+5. Open a Pull Request
 
-5. **Open a Pull Request** on GitHub with a detailed description of your changes.
+## 📝 License
 
-For major changes, please open an issue first to discuss what you would like to change.
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgements
 
-- **Original OpenWebUI:** The inspiration behind Open-WebUI-Plus.
-- **Easy-Ware Community:** For continuous feedback, testing, and support.
-- **Open Source Contributors:** Thanks to the developers of the libraries and tools that made this project possible.
+- Original OpenWebUI developers
+- Easy-Ware community
+- All open-source contributors
+
+## 📫 Support
+
+- For bugs and features, please use the [Issue Tracker](https://github.com/easy-ware/Open-WebUI-Plus/issues)
+- Join our [Discord community](https://discord.gg/yourserver) for discussions
+- Check our [Documentation](https://docs.openwebuiplus.dev) for detailed guides
 
 ---
 
-*Happy coding! Enjoy using Open-WebUI-Plus and feel free to [open an issue](https://github.com/easy-ware/Open-WebUI-Plus/issues) if you have any questions, suggestions, or need help.*
-
-```
-
----
-
-Feel free to modify any sections to better suit your project's evolving needs. Enjoy coding and sharing your enhanced web UI with the community!
+Made with ❤️ by the Easy-Ware Team
