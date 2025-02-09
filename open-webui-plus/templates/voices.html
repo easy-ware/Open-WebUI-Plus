@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edge TTS Voices</title>
+    <style>
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
+                --card-bg: rgba(255, 255, 255, 0.9);
+                --card-hover: #ffffff;
+                --text-primary: #1a1f36;
+                --text-secondary: #4a5578;
+                --accent: #3b82f6;
+                --accent-light: #60a5fa;
+                --border: rgba(0, 0, 0, 0.1);
+                --search-bg: rgba(255, 255, 255, 0.9);
+                --item-bg: #f8fafc;
+                --item-hover: #ffffff;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-gradient: linear-gradient(135deg, #1a1f36 0%, #111827 100%);
+                --card-bg: rgba(30, 41, 59, 0.7);
+                --card-hover: rgba(30, 41, 59, 0.9);
+                --text-primary: #f1f5f9;
+                --text-secondary: #94a3b8;
+                --accent: #60a5fa;
+                --accent-light: #93c5fd;
+                --border: rgba(255, 255, 255, 0.1);
+                --search-bg: rgba(30, 41, 59, 0.8);
+                --item-bg: rgba(30, 41, 59, 0.5);
+                --item-hover: rgba(30, 41, 59, 0.8);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        .header-container {
+            position: sticky;
+            top: 0;
+            background: var(--bg-gradient);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            z-index: 100;
+        }
+
+        .main-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            text-align: center;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            font-size: 1.1rem;
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            background: var(--search-bg);
+            color: var(--text-primary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+        }
+
+        .search-stats {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+            height: 1.5rem;
+        }
+
+        .languages-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+
+        .language-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .language-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem;
+            border-bottom: 2px solid var(--accent);
+            background: var(--card-bg);
+        }
+
+        .language-code {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .voice-count {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            background: var(--item-bg);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .voice-group {
+            padding: 1.25rem;
+        }
+
+        .gender-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            padding: 0 0.5rem;
+        }
+
+        .voice-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            list-style: none;
+        }
+
+        .voice-item {
+            background: var(--item-bg);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .voice-item:hover {
+            background: var(--item-hover);
+            transform: translateX(0.5rem);
+            border-color: var(--accent);
+        }
+
+        .voice-name {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .copy-button {
+            padding: 0.35rem 0.75rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-button:hover {
+            background: var(--accent-light);
+        }
+
+        .voice-id {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            word-break: break-all;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .languages-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .voice-group {
+                padding: 1rem;
+            }
+
+            .voice-item {
+                padding: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1 class="main-title">Edge TTS Voices</h1>
+        <p class="description">
+            Browse available voices for text-to-speech conversion.
+            Each voice supports different speeds: 'normal', 'slow', or 'fast'.
+        </p>
+
+        <div class="search-container">
+            <input type="text"
+                   class="search-box"
+                   placeholder="Search by language code, voice name, or ID..."
+                   id="searchBox"
+                   autofocus>
+            <div class="search-stats" id="searchStats"></div>
+        </div>
+    </div>
+
+    <div class="languages-container">
+        <div class="languages-grid" id="languagesGrid">
+            {% for lang_code, voices in languages.items() %}
+            <div class="language-card" data-lang="{{ lang_code }}">
+                <div class="language-header">
+                    <span class="language-code">{{ lang_code }}</span>
+                    <span class="voice-count">
+                        {{ (voices.female|length) + (voices.male|length) }} voices
+                    </span>
+                </div>
+
+                {% if voices.female %}
+                <div class="voice-group">
+                    <div class="gender-label">
+                        <span>Female Voices</span>
+                        <span>{{ voices.female|length }}</span>
+                    </div>
+                    <ul class="voice-list">
+                        {% for voice in voices.female %}
+                        <li class="voice-item"
+                            data-voice-id="{{ voice.id }}"
+                            data-voice-name="{{ voice.name }}"
+                            data-lang="{{ lang_code }}">
+                            <div class="voice-name">
+                                {{ voice.display_name }}
+                                <div class="button-group">
+                                    <button class="copy-button" onclick="copyVoiceId('{{ voice.id }}')">
+                                        Copy ID
+                                    </button>
+                                    <button class="copy-button" onclick="copyVoiceName('{{ voice.name }}')">
+                                        Copy Name
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="voice-id">{{ voice.id }}</div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                {% if voices.male %}
+                <div class="voice-group">
+                    <div class="gender-label">
+                        <span>Male Voices</span>
+                        <span>{{ voices.male|length }}</span>
+                    </div>
+                    <ul class="voice-list">
+                        {% for voice in voices.male %}
+                        <li class="voice-item"
+                            data-voice-id="{{ voice.id }}"
+                            data-voice-name="{{ voice.name }}"
+                            data-lang="{{ lang_code }}">
+                            <div class="voice-name">
+                                {{ voice.display_name }}
+                                <div class="button-group">
+                                    <button class="copy-button" onclick="copyVoiceId('{{ voice.id }}')">
+                                        Copy ID
+                                    </button>
+                                    <button class="copy-button" onclick="copyVoiceName('{{ voice.name }}')">
+                                        Copy Name
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="voice-id">{{ voice.id }}</div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBox = document.getElementById('searchBox');
+            const searchStats = document.getElementById('searchStats');
+            const languagesGrid = document.getElementById('languagesGrid');
+            const toast = document.getElementById('toast');
+            let searchTimeout;
+
+            function showToast(message, duration = 1500) {
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, duration);
+            }
+
+            async function copyToClipboard(text, message) {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    showToast(message);
+                } catch (err) {
+                    showToast('Failed to copy to clipboard');
+                }
+            }
+
+            window.copyVoiceId = (voiceId) => {
+                copyToClipboard(voiceId, 'Voice ID copied to clipboard!');
+            };
+
+            window.copyVoiceName = (voiceName) => {
+                copyToClipboard(voiceName, 'Voice name copied to clipboard!');
+            };
+
+            function performSearch() {
+                const searchTerm = searchBox.value.toLowerCase();
+                const cards = document.querySelectorAll('.language-card');
+                let visibleVoices = 0;
+                let visibleCards = 0;
+
+                cards.forEach(card => {
+                    let hasVisibleVoices = false;
+                    const langCode = card.getAttribute('data-lang').toLowerCase();
+                    const cardVoices = card.querySelectorAll('.voice-item');
+
+                    cardVoices.forEach(voice => {
+                        const voiceId = voice.getAttribute('data-voice-id').toLowerCase();
+                        const voiceName = voice.getAttribute('data-voice-name').toLowerCase();
+                        const displayName = voice.querySelector('.voice-name').textContent.toLowerCase();
+
+                        const isMatch = voiceId.includes(searchTerm) ||
+                                      voiceName.includes(searchTerm) ||
+                                      langCode.includes(searchTerm) ||
+                                      displayName.includes(searchTerm);
+
+                        if (isMatch) {
+                            voice.style.display = '';
+                            hasVisibleVoices = true;
+                            visibleVoices++;
+                        } else {
+                            voice.style.display = 'none';
+                        }
+                    });
+
+                    // Update gender count display
+                    card.querySelectorAll('.voice-group').forEach(group => {
+                        const visibleInGroup = group.querySelectorAll('.voice-item[style=""]').length;
+                        const countDisplay = group.querySelector('.gender-label span:last-child');
+                        if (countDisplay) {
+                            countDisplay.textContent = visibleInGroup;
+                        }
+                    });
+
+                    if (hasVisibleVoices) {
+                        card.style.display = '';
+                        visibleCards++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Update search stats with animation
+                if (searchTerm) {
+                    searchStats.style.opacity = '0';
+                    setTimeout(() => {
+                        searchStats.textContent = `Found ${visibleVoices} voices in ${visibleCards} languages`;
+                        searchStats.style.opacity = '1';
+                    }, 200);
+                } else {
+                    searchStats.style.opacity = '0';
+                    setTimeout(() => {
+                        searchStats.textContent = '';
+                        searchStats.style.opacity = '1';
+                    }, 200);
+                }
+
+                // Show/hide no results message
+                let noResultsMsg = languagesGrid.querySelector('.no-results');
+                if (visibleVoices === 0) {
+                    if (!noResultsMsg) {
+                        noResultsMsg = document.createElement('div');
+                        noResultsMsg.className = 'no-results';
+                        noResultsMsg.innerHTML = `
+                            <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">No matching voices found</div>
+                            <div style="color: var(--text-secondary)">Try adjusting your search terms</div>
+                        `;
+                        languagesGrid.appendChild(noResultsMsg);
+
+                        // Animate in
+                        requestAnimationFrame(() => {
+                            noResultsMsg.style.opacity = '0';
+                            requestAnimationFrame(() => {
+                                noResultsMsg.style.opacity = '1';
+                            });
+                        });
+                    }
+                } else if (noResultsMsg) {
+                    noResultsMsg.style.opacity = '0';
+                    setTimeout(() => {
+                        noResultsMsg.remove();
+                    }, 200);
+                }
+            }
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Focus search box when pressing '/'
+                if (e.key === '/' && document.activeElement !== searchBox) {
+                    e.preventDefault();
+                    searchBox.focus();
+                }
+                // Clear search when pressing 'Escape'
+                if (e.key === 'Escape' && searchBox === document.activeElement) {
+                    searchBox.value = '';
+                    performSearch();
+                    searchBox.blur();
+                }
+            });
+
+            // Debounced search with animation frame
+            searchBox.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    requestAnimationFrame(performSearch);
+                }, 150);
+            });
+
+            // Initialize search
+            performSearch();
+
+            // Add smooth scroll behavior
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

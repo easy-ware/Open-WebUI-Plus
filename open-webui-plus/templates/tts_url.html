@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title|default('Welcome') }}</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f0f2f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --accent-color: #0066cc;
+            --border-color: #dee2e6;
+            --success-color: #28a745;
+            --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #1a1a1a;
+                --bg-secondary: #2d2d2d;
+                --text-primary: #ffffff;
+                --text-secondary: #cccccc;
+                --accent-color: #3b82f6;
+                --border-color: #404040;
+                --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: var(--bg-primary);
+            padding: 1rem;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex-grow: 1;
+        }
+
+        .card {
+            background-color: var(--bg-primary);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .message {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .url-container {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .url-text {
+            flex: 1;
+            min-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: var(--accent-color);
+            font-family: monospace;
+            padding: 0.5rem;
+        }
+
+        .copy-button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+            min-width: 100px;
+        }
+
+        .copy-button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .copy-button.copied {
+            background-color: var(--success-color);
+        }
+
+        .footer {
+            background-color: var(--bg-primary);
+            padding: 1rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .url-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .url-text {
+                padding: 0.75rem;
+                text-align: center;
+            }
+            
+            .copy-button {
+                width: 100%;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            background-color: var(--success-color);
+            color: white;
+            border-radius: 6px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>{{ header_text|default('Welcome to Our Site') }}</h1>
+    </header>
+
+    <main class="container">
+        <div class="card">
+            <div class="message">
+                {{ message|default('Check out our amazing content and share it with your friends!') }}
+            </div>
+            <div class="url-container">
+                <div class="url-text" id="urlText">{{ url|default('https://example.com/awesome-page') }}</div>
+                <button class="copy-button" onclick="copyUrl()">Copy URL</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>{{ footer_text|default('© ' + now.year|string + ' Your Company. All rights reserved.') }}</p>
+    </footer>
+
+    <div class="notification" id="notification">URL copied to clipboard!</div>
+
+    <script>
+        function copyUrl() {
+            const urlText = document.getElementById('urlText').textContent;
+            const button = document.querySelector('.copy-button');
+            const notification = document.getElementById('notification');
+            
+            navigator.clipboard.writeText(urlText).then(() => {
+                // Button feedback
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                // Show notification
+                notification.classList.add('show');
+                
+                // Reset after delay
+                setTimeout(() => {
+                    button.textContent = 'Copy URL';
+                    button.classList.remove('copied');
+                    notification.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                button.textContent = 'Failed';
+                notification.textContent = 'Failed to copy URL';
+                notification.style.backgroundColor = '#dc3545';
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    button.textContent = 'Copy URL';
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        }
+
+        // Optional: Add smooth scroll behavior
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

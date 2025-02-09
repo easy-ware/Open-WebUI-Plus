@@ -1,0 +1,10 @@
+open-webui
+edge-tts==7.0.0
+colorama==0.4.6 
+Flask==3.1.0    
+flask-cors==5.0.0   
+langdetect==1.0.9 
+flask[async]==3.1.0 
+requests==2.32.3
+faster_whisper==1.0.3
+torch
